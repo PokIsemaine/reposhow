@@ -27,6 +27,18 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000), paste a GitHub repo URL, and generate your video.
 
+## Inspiration
+
+**Great open-source projects often die in silence.**
+
+Developers spend most of their time building, but turning a GitHub repository into a polished demo video still takes a surprising amount of manual work. You have to decide what to highlight, write a script, plan visuals, generate assets, sync narration, and edit everything into a coherent story.
+
+At the same time, AI has made video generation much easier, but technical projects such as code repositories still present a unique challenge. A video can look polished without really reflecting what the project is about. For developer-facing products, the hard part is not just generating visuals — it is understanding the project well enough to tell a story that feels relevant and grounded.
+
+That was the starting point for **RepoShow**.
+
+We wanted to explore whether a GitHub repository could be turned into a short promotional video automatically — one that is visually compelling, but still connected to the project's actual purpose, flow, and value.
+
 ## Page Preview
 
 | Landing Page | Create Config | Run Progress | Storyboard | Result |

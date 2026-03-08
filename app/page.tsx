@@ -149,13 +149,15 @@ export default function Landing() {
 
   const featuresStyle: React.CSSProperties = {
     padding: 'var(--space-3xl) var(--space-lg)',
+    background: 'var(--color-bg-alt)',
+    borderTop: 'var(--border-width) solid var(--color-border)',
   };
 
   const featuresGridStyle: React.CSSProperties = {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
     gap: 'var(--space-md)',
-    maxWidth: '1000px',
+    maxWidth: '800px',
     margin: '0 auto',
   };
 
@@ -187,10 +189,9 @@ export default function Landing() {
 
       {/* Hero */}
       <section style={heroStyle}>
-        <h1 style={titleStyle}>Turn any GitHub repo into a demo video</h1>
+        <h1 style={titleStyle}>Turn any GitHub repo into a promo video.</h1>
         <p style={subtitleStyle}>
-          Paste your repository URL, and we'll automatically generate a professional
-          promotional video with code analysis, narration, and visuals.
+          RepoShow is a repo-aware AI system that turns a GitHub repository into a short promotional video.
         </p>
 
         <form onSubmit={handleSubmit} style={formStyle}>
@@ -240,22 +241,22 @@ export default function Landing() {
           <Card>
             <div style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-sm)' }}>1</div>
             <h3>Paste Repo</h3>
-            <p style={{ color: 'var(--color-text-muted)', marginTop: 'var(--space-sm)' }}>
-              Enter any public or private GitHub repository URL
+            <p style={{ color: 'var(--color-text-muted)', marginTop: 'var(--space-sm)', fontSize: 'var(--text-sm)' }}>
+              Enter any public GitHub repository URL
             </p>
           </Card>
           <Card>
             <div style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-sm)' }}>2</div>
             <h3>AI Analysis</h3>
-            <p style={{ color: 'var(--color-text-muted)', marginTop: 'var(--space-sm)' }}>
-              We analyze your code and generate a professional script
+            <p style={{ color: 'var(--color-text-muted)', marginTop: 'var(--space-sm)', fontSize: 'var(--text-sm)' }}>
+              Code-aware repo analysis, script & storyboard generation
             </p>
           </Card>
           <Card>
             <div style={{ fontSize: 'var(--text-3xl)', marginBottom: 'var(--space-sm)' }}>3</div>
             <h3>Get Video</h3>
-            <p style={{ color: 'var(--color-text-muted)', marginTop: 'var(--space-sm)' }}>
-              Download your MP4 video with narration and visuals
+            <p style={{ color: 'var(--color-text-muted)', marginTop: 'var(--space-sm)', fontSize: 'var(--text-sm)' }}>
+              Remotion code-based rendering to MP4
             </p>
           </Card>
         </div>
@@ -268,25 +269,25 @@ export default function Landing() {
           <div style={featureCardStyle}>
             <h4>Code Analysis</h4>
             <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)' }}>
-              AI understands your project
+              Powered by MiniMax M2.5
             </p>
           </div>
           <div style={featureCardStyle}>
-            <h4>Voice Clone</h4>
+            <h4>Auto Audio</h4>
             <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)' }}>
-              Use your own voice
+              ElevenLabs TTS + BGM
             </p>
           </div>
           <div style={featureCardStyle}>
-            <h4>Auto Music</h4>
+            <h4>AI Images</h4>
             <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)' }}>
-              Background music
+              banana (Nano Banana)
             </p>
           </div>
           <div style={featureCardStyle}>
             <h4>HD Output</h4>
             <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)' }}>
-              720p or 1080p video
+              Remotion rendering
             </p>
           </div>
         </div>
