@@ -1,0 +1,69 @@
+{
+  "storyboard": {
+    "scenes": [
+      {
+        "sceneNumber": 1,
+        "durationSec": 10,
+        "narrationText": "What if you could uncover hidden fraud networks just by asking a question? YiGraph transforms how financial analysts discover critical relationships in complex data—simply describe what you need, and let AI do the rest.",
+        "visualPrompt": "A futuristic digital network visualization showing interconnected nodes glowing in blue and gold, representing financial transactions and relationships, with a magnifying glass hovering over a highlighted fraud pattern",
+        "transition": "fade",
+        "id": "fa999391-6f01-4f67-9d27-179a11429707"
+      },
+      {
+        "sceneNumber": 2,
+        "durationSec": 12,
+        "narrationText": "YiGraph understands your business questions in plain English. No more writing complex Cypher queries or mastering graph syntax.",
+        "visualPrompt": "A business professional typing a natural language question on a sleek laptop screen, with a speech bubble transforming into a visual graph query diagram, showing the translation from plain English to technical visualization",
+        "transition": "slide",
+        "id": "a1999eca-6f47-4078-a99a-d8ed2f27f933"
+      },
+      {
+        "sceneNumber": 3,
+        "durationSec": 10,
+        "narrationText": "Just ask: \"Show me all accounts linked to this suspicious transaction within three hops.\" YiGraph automatically plans the analysis, executes the algorithms, and delivers clear, actionable insights.",
+        "visualPrompt": "A dynamic graph visualization displaying nodes and connections expanding outward in concentric rings, highlighting a suspicious transaction in red with three-hop connections branching to related accounts in different colors",
+        "transition": "fade",
+        "id": "28085bc8-4feb-4ee6-9009-bd3d1fdcc6ba"
+      },
+      {
+        "sceneNumber": 4,
+        "durationSec": 12,
+        "narrationText": "Your data lives everywhere—CSV files, documents, spreadsheets, even academic papers. YiGraph automatically extracts entities and relationships from all these sources, building structured knowledge graphs you can query instantly.",
+        "visualPrompt": "A centralized hub icon receiving data streams from multiple source icons (CSV file, document, spreadsheet, research paper) flowing into a unified connected knowledge graph network",
+        "transition": "wipe",
+        "id": "11150354-a222-402b-8ed5-ae7fa6d39a50"
+      },
+      {
+        "sceneNumber": 5,
+        "durationSec": 10,
+        "narrationText": "Built for financial services, YiGraph includes a complete anti-money laundering demo using the AMLSim1K dataset. Detect transaction patterns, identify high-risk networks, and generate compliance reports—all powered by cutting-edge graph algorithms running on NetworkX with parallel processing.",
+        "visualPrompt": "A financial dashboard displaying transaction pattern analysis charts, risk indicators, and a compliance report preview, with a background visualization of interconnected high-risk network nodes highlighted in red",
+        "transition": "cut",
+        "id": "ccead981-758e-4946-baf3-f3486a345add"
+      },
+      {
+        "sceneNumber": 6,
+        "durationSec": 6,
+        "narrationText": "Ready to transform your financial investigations? Explore YiGraph and start asking questions your data has been waiting to answer.",
+        "visualPrompt": "A compelling call-to-action screen with the YiGraph logo, featuring a search bar with a cursor blinking, inviting the viewer to start asking questions",
+        "transition": "fade",
+        "id": "7b63b44a-4627-40a9-8020-b4db043c01f0"
+      }
+    ],
+    "totalDurationSec": 60
+  },
+  "assets": {
+    "images": [
+      "assets/scene_001.png",
+      "assets/scene_002.png",
+      "assets/scene_003.png",
+      "assets/scene_004.png",
+      "assets/scene_005.png",
+      "assets/scene_006.png"
+    ],
+    "voiceAudio": "assets/audio/voice.wav",
+    "bgmAudio": "assets/audio/bgm.wav",
+    "mixedAudio": "assets/audio/mixed.wav"
+  },
+  "runId": "8367598f-74a9-4e02-a2ae-22182c77b60d"
+}

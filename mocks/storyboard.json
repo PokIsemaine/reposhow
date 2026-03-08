@@ -1,0 +1,45 @@
+{
+  "scenes": [
+    {
+      "id": "scene-001",
+      "sceneNumber": 1,
+      "durationSec": 5,
+      "narrationText": "Welcome to this amazing project.",
+      "visualPrompt": "A beautiful code editor showing a modern software project with syntax highlighting and a clean UI design.",
+      "transition": "fade"
+    },
+    {
+      "id": "scene-002",
+      "sceneNumber": 2,
+      "durationSec": 5,
+      "narrationText": "This project features cutting-edge technology.",
+      "visualPrompt": "Technical diagram showing architecture with connected nodes and arrows, modern tech stack icons.",
+      "transition": "slide"
+    },
+    {
+      "id": "scene-003",
+      "sceneNumber": 3,
+      "durationSec": 5,
+      "narrationText": "Easy to use and highly customizable.",
+      "visualPrompt": "Hands typing on keyboard with code on screen, developer workflow illustration.",
+      "transition": "fade"
+    },
+    {
+      "id": "scene-004",
+      "sceneNumber": 4,
+      "durationSec": 5,
+      "narrationText": "Join thousands of developers using this project.",
+      "visualPrompt": "Open source community illustration with GitHub contributors, collaboration icons.",
+      "transition": "wipe"
+    },
+    {
+      "id": "scene-005",
+      "sceneNumber": 5,
+      "durationSec": 5,
+      "narrationText": "Thanks for watching. Star the repo to support us!",
+      "visualPrompt": "Celebration with stars and fireworks, gratitude message displayed.",
+      "transition": "fade"
+    }
+  ],
+  "totalDurationSec": 25
+}

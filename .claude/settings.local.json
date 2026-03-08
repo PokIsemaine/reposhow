@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(taskkill:*)",
+      "Bash(timeout 15 npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(npm run dev)",
+      "Bash(powershell -Command \"Start-Sleep -Seconds 8\")",
+      "Bash(pkill:*)",
+      "WebSearch",
+      "WebFetch(domain:elevenlabs.io)",
+      "WebFetch(domain:platform.minimaxi.com)",
+      "mcp__ide__getDiagnostics",
+      "Bash(node -e:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next lint:*)",
+      "Bash(npm view:*)",
+      "Bash(npm search:*)",
+      "WebFetch(domain:doc.dmxapi.cn)",
+      "WebFetch(domain:www.dmxapi.cn)",
+      "Bash(tasklist:*)",
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(python -c:*)",
+      "Bash(ls:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "WebFetch(domain:www.remotion.dev)",
+      "WebFetch(domain:docs.elevenlabs.io)",
+      "Bash(xxd:*)"
+    ]
+  }
+}
