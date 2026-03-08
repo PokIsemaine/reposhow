@@ -51,13 +51,17 @@ export async function generateImage(
 }
 
 /**
- * Generate image using DMXAPI with fallback
+ * Generate image using DMXAPI with fallback and retry
  */
 async function generateWithDMXAPI(
   options: ImageGenerationOptions
 ): Promise<ImageGenerationResult> {
   const config = getConfig();
   const { prompt, aspectRatio = '16:9', imageSize } = options;
+
+  // Retry configuration
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY_MS = 2000;
 
   // Determine size based on aspect ratio or explicit size
   let size = imageSize;
@@ -84,48 +88,63 @@ async function generateWithDMXAPI(
     const modelId = MODEL_MAPPING[model] || model;
     const isGptImage = modelId === 'gpt-image-1-mini';
 
-    try {
-      // Build request body based on model type
-      const requestBody: Record<string, unknown> = {
-        model: modelId,
-        prompt: prompt,
-      };
+    // Build request body based on model type
+    const requestBody: Record<string, unknown> = {
+      model: modelId,
+      prompt: prompt,
+    };
 
-      // gpt-image-1-mini uses different parameter names
-      if (isGptImage) {
-        requestBody.n = 1;
-        requestBody.size = size;
-      } else {
-        requestBody.image_size = size;
-        requestBody.aspect_ratio = aspectRatio;
-        requestBody.number_of_images = 1;
-      }
+    // gpt-image-1-mini uses different parameter names
+    if (isGptImage) {
+      requestBody.n = 1;
+      requestBody.size = size;
+    } else {
+      requestBody.image_size = size;
+      requestBody.aspect_ratio = aspectRatio;
+      requestBody.number_of_images = 1;
+    }
 
-      console.log(`[DMXAPI] Trying model: ${modelId}`);
+    console.log(`[DMXAPI] Trying model: ${modelId}`);
 
-      const response = await fetch(`${config.DMXAPI_BASE_URL}/v1/images/generations`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${config.DMXAPI_API_KEY}`,
-          // Only add goog-api-key for Google models
-          ...(!isGptImage && { 'x-goog-api-key': config.DMXAPI_API_KEY! }),
-        },
-        body: JSON.stringify(requestBody),
-      });
+    // Retry loop for 502 errors
+    let lastError: string = '';
+    for (let retryCount = 0; retryCount <= MAX_RETRIES; retryCount++) {
+      try {
+        const response = await fetch(`${config.DMXAPI_BASE_URL}/v1/images/generations`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${config.DMXAPI_API_KEY}`,
+            // Only add goog-api-key for Google models
+            ...(!isGptImage && { 'x-goog-api-key': config.DMXAPI_API_KEY! }),
+          },
+          body: JSON.stringify(requestBody),
+        });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        // If 503 and we have more models to try, continue to next model
-        if (response.status === 503 && modelsToTry.indexOf(model) < modelsToTry.length - 1) {
-          console.log(`[DMXAPI] Model ${modelId} unavailable, trying fallback...`);
-          continue;
+        // Handle 502 with retry
+        if (response.status === 502) {
+          if (retryCount < MAX_RETRIES) {
+            console.log(`[DMXAPI] Received 502 error, retrying (${retryCount + 1}/${MAX_RETRIES})...`);
+            await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+            continue;
+          } else {
+            lastError = '502 Bad Gateway after all retries';
+            break;
+          }
         }
-        return {
-          success: false,
-          error: `DMXAPI error (${response.status}): ${errorText}`,
-        };
-      }
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          // If 503 and we have more models to try, continue to next model
+          if (response.status === 503 && modelsToTry.indexOf(model) < modelsToTry.length - 1) {
+            console.log(`[DMXAPI] Model ${modelId} unavailable, trying fallback...`);
+            continue;
+          }
+          return {
+            success: false,
+            error: `DMXAPI error (${response.status}): ${errorText}`,
+          };
+        }
 
       const data = await response.json();
 
@@ -202,16 +221,28 @@ async function generateWithDMXAPI(
       success: false,
       error: `Unexpected DMXAPI response format: ${JSON.stringify(data).substring(0, 500)}`,
     };
-    } catch (error) {
-      // If error and we have more models to try, continue to next model
-      if (modelsToTry.indexOf(model) < modelsToTry.length - 1) {
-        console.log(`[DMXAPI] Model ${modelId} failed with error, trying fallback...`);
-        continue;
+      } catch (error) {
+        // If this was a 502 retry failure, don't fall through to model fallback
+        if (lastError && lastError.includes('502')) {
+          if (modelsToTry.indexOf(model) < modelsToTry.length - 1) {
+            console.log(`[DMXAPI] Model ${modelId} failed with 502, trying fallback...`);
+            continue;
+          }
+          return {
+            success: false,
+            error: `DMXAPI error: ${lastError}`,
+          };
+        }
+        // If error and we have more models to try, continue to next model
+        if (modelsToTry.indexOf(model) < modelsToTry.length - 1) {
+          console.log(`[DMXAPI] Model ${modelId} failed with error, trying fallback...`);
+          continue;
+        }
+        return {
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error',
+        };
       }
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-      };
     }
   }
 

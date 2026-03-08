@@ -31,7 +31,7 @@ function VideoContent(props: VideoProps) {
     <AbsoluteFill style={{ backgroundColor: '#000000' }}>
       {/* Background BGM (continuous across all scenes) */}
       {assets.bgmAudio && (
-        <Audio src={staticFile(assets.bgmAudio)} volume={assets.bgmVolume ?? 0.3} />
+        <Audio src={staticFile(assets.bgmAudio)} volume={Math.min(1, (assets.bgmVolume ?? 30) / 100)} />
       )}
 
       {/* Render each scene with its own voice audio */}
@@ -41,7 +41,9 @@ function VideoContent(props: VideoProps) {
         currentFrame += sceneDurationFrames;
 
         const imagePath = assets.images[index] || defaultImage;
+        // Add fallback logic: scene voice -> combined voice -> mixed audio
         const sceneVoiceFile = assets.voiceAudioFiles?.[index];
+        const voiceSource = sceneVoiceFile || assets.voiceAudio || assets.mixedAudio;
 
         return (
           <Sequence
@@ -50,8 +52,8 @@ function VideoContent(props: VideoProps) {
             durationInFrames={sceneDurationFrames}
           >
             {/* Scene-level voice audio - plays independently for each scene */}
-            {sceneVoiceFile && (
-              <Audio src={staticFile(sceneVoiceFile)} volume={1} />
+            {voiceSource && (
+              <Audio src={staticFile(voiceSource)} startFrom={0} volume={1} />
             )}
 
             <Scene
